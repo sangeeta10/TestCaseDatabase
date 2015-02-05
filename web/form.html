@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        label, input{
+            display: block;
+        }
+        label{
+            margin-top: 10px;
+        margin-bottom: 30px;
+        }
+
+    </style>
+</head>
+<body  bgcolor="#f0f8ff">
+<script>
+    function validateForm()
+    {
+        var x = document.forms["myForm"]["testID"].value;
+        if(x==null || x=="")
+        {
+            alert("Enter the test ID");
+            return false;
+        }
+        var tName = document.forms["myForm"]["testName"].value;
+        if(tName==null || tName=="")
+        {
+            alert("Enter the test Name");
+            return false;
+        }
+        var tDes = document.forms["myForm"]["testDescription"].value;
+        if(tDes==null || tDes=="")
+        {
+            alert("Enter the test Description");
+            return false;
+        }
+        var tResult = document.forms["myForm"]["testResult"].value;
+        if(tResult==null || tResult=="")
+        {
+            alert("Enter the test Result");
+            return false;
+        }
+        var exResult = document.forms["myForm"]["expectedResult"].value;
+        if(exResult==null || exResult=="")
+        {
+            alert("Enter the Expected Result");
+            return false;
+        }
+        var tags = document.forms["myForm"]["tags"].value;
+        if(tName==null || tName=="")
+        {
+            alert("Enter the tags");
+            return false;
+        }
+        var time = document.forms["myForm"]["testTimestamp"].value;
+        if(time == null || time == "")
+        {
+            alert("Enter the time stamp");
+            return false;
+        }
+    }
+</script>
+<div align="center">
+    <h2>ENTER TEST CASES</h2>
+<form action="page2.html" method="post" name="myForm" onsubmit="return validateForm()">
+   <label>TEST CASE ID:
+       <input type="text" name="testID"
+              style="width: 20em;height: 2em;"/>
+   </label>
+
+    <label>TEST CASE NAME:<input type="text" name="testName"
+                                 style="width: 20em;height: 2em;"/>
+    </label>
+    <label>
+    TEST CASE DESCRIPTION:<input type="text" name="testDescription"
+                                 style="width: 20em;height: 2em;"/>
+    </label>
+    <label>
+        TAGS:<input type="text" name="tags"
+                    style="width: 20em;height: 2em;"/>
+    </label>
+    <label>
+    TEST RESULT:<input type="text" name="testResult"
+                       style="width: 20em;height: 2em;"/>
+    </label>
+
+    <label>
+    EXPECTED RESULT:<input type="text" name="expectedResult"
+                           style="width: 20em;height: 2em;"/>
+    </label>
+
+    <label>
+        ENTER TIME STAMP (yyyy-mm-dd hh:mm:ss):<input type="text" name="testTimestamp"
+                               style="width: 20em;height: 2em;"/>
+    </label>
+
+    <label>
+    <input type="submit" style="width: 10em; height: 2em;" value="SUBMIT"/>
+    </label>
+
+</form>
+    <form action="index.html">
+        <input type="submit" style="width: 10em; height: 2em;" value="CANCEL"/>
+    </form>
+</div>
+</body>
+</html>

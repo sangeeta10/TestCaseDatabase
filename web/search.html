@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script>
+        function searchby()
+        {
+            var x = document.getElementsByName("name");
+            if(x[0].checked)
+            {
+                document.getElementById("in").innerHTML="<b>Enter the test ID:</b><input type=\"text\" name=\"select\"><input type=\"submit\" name=\"search\" value=\"submit\">";
+
+            }
+            else if(x[1].checked)
+            {
+                document.getElementById("in").innerHTML="<b>Enter the tags:</b><input type=\"text\" name=\"select\"><input type=\"submit\" name=\"search\" value=\"submit\">";
+            }
+            else if(x[2].checked)
+            {
+                document.getElementById("in").innerHTML="<b>Enter the expected result:</b><input type=\"text\" name=\"select\"><input type=\"submit\" name=\"search\" value=\"submit\">";
+            }
+            else if(x[3].checked) {
+                document.getElementById("in").innerHTML = "<b>Enter the date:</b><input type=\"text\" name=\"select\"><input type=\"submit\" name=\"search\" value=\"submit\">";
+            }
+        }
+    </script>
+</head>
+<body bgcolor="#f0f8ff">
+<h2 align="center">SEARCH BASED ON:</h2>
+<div align="center">
+    <form align="center" action="dummysearch.html" method='post'>
+    <p><input type="radio" onclick="searchby()" value="testID" name="name">&nbsp;TestID</p>
+    <p><input type="radio" onclick="searchby()" value="tags" name="name">&nbsp;Tags </p>
+    <p><input type="radio" onclick="searchby()" value="exRes" name="name">&nbsp;Expected Result</p>
+    <p><input type="radio" onclick="searchby()" value="time" name="name">&nbsp;Date</p><div id="in" style="text-align: center;"></div>
+    </form>
+</div>
+<br>
+<br>
+<form style="padding: 20px;" align="center" action="index.html">
+    <input type="submit" value="BACK">
+</form>
+</body>
+</html>
