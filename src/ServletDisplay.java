@@ -53,7 +53,19 @@ public class ServletDisplay extends HttpServlet {
             stmt = con.createStatement();
             rs = stmt.executeQuery("SELECT * FROM testtable");
             String docType = "<!doctype html public \\\\\\\"-//w3c//dtd html 4.0 \"+\n" +
-                    "\"transitional//en\\\"><html><head><title>Page2</title></head><body bgcolor=\"#f0f8ff\">" +
+                    "\"transitional//en\\\"><html><head><title>Page2</title><style>\n" +
+                    "table, th , td  {\n" +
+                    "  border: 1px solid grey;\n" +
+                    "  border-collapse: collapse;\n" +
+                    "  padding: 5px;\n" +
+                    "}\n" +
+                    "table tr:nth-child(odd)\t{\n" +
+                    "  background-color: #f1f1f1;\n" +
+                    "}\n" +
+                    "table tr:nth-child(even) {\n" +
+                    "  background-color: #ffffff;\n" +
+                    "}\n" +
+                    "</style></head><body bgcolor=\"#f0f8ff\">" +
                     "<h3 style=\"text-align:center\">TEST CASE DATABASE" + "</h3><table border=\"1px\" align=\"center\" cellpadding=\"10\">";
             out.println(docType + "<tr><td>Test ID</td><td>Test Name</td><td>Test Description</td><td>Tags</td><td>Test Result</td><td>tExpected Result</td><td>Date</td></tr>");
 
