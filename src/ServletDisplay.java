@@ -44,6 +44,7 @@ public class ServletDisplay extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
         try {
@@ -52,6 +53,15 @@ public class ServletDisplay extends HttpServlet {
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/testCases", "root", "admin");
             stmt = con.createStatement();
             rs = stmt.executeQuery("SELECT * FROM testtable");
+            String table_data = "table_data = [";
+            while(rs.next())
+            {
+                table_data+="{id: '"+rs.getInt(1)+"' ,name: '"+rs.getString(2)+"' ,description: '"+
+                        rs.getString(3)+"' ,tag: '"+rs.getString(4)+"' ,result: '"+rs.getString(5)+
+                        "' ,expect: '"+rs.getString(6)+"', time: '"+rs.getDate(7)+"'},";
+
+            }
+            String new_table = table_data.substring(0,table_data.length()-1)+']';
             String docType = "<!doctype html public \\\\\\\"-//w3c//dtd html 4.0 \"+\n" +
                     "\"transitional//en\\\"><html><head><title>Page2</title><style>\n" +
                     "table, th , td  {\n" +
@@ -69,26 +79,27 @@ public class ServletDisplay extends HttpServlet {
                     "    width:20em;\n" +
                     "    height:auto;\n" +
                     "    display:inline-block;\n" +
-                    "}</style>"+
-                    "<script type=\"text/javascript\" src=\"http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js\"></script>\n" +
-                    "<script>jQuery(function(){\n" +
-                    "$(\"#search\").autocomplete(\"getlist.jsp\");\n" +
-                    "});" +
-                    " </script>"+
-                    "</head><body bgcolor=\"#f0f8ff\">" +
+                    "}</style></head><script src=\"http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js\"></script>";
+            out.println(docType);
+            out.println("<body bgcolor=\"#f0f8ff\">" +
+                    "<div ng-app=\"\" ng-init=\""+new_table+"\">"+
                     "<h2 style=\"text-align:center\">TEST CASE DATABASE</h2>"+
-            "<div width=\"30%\" style=\"float:left\"><form align=\"center\">" +
-                    "<input style=\"width:20em; height:4em;\" type=\"text\" name=\"search\" id=\"search\"></form></div>"+
-                    "<div width=\"70%\" style=\"float:none\" test-align:center;\">"+
-            "<form action=\"DeleteServlet\" method=\"get\" align=\"center\"><table border=\"1px\" align=\"center\" cellpadding=\"10\">";
-            out.println(docType + "<tr><td></td><td>Test ID</td><td>Test Name</td><td>Test Description</td><td>Tags</td><td>Test Result</td><td>tExpected Result</td><td>Date</td></tr>");
+            "<div width=\"20em\" style=\"float:left\"><form align=\"center\">" +
+                    "<input style=\"width:20em; height:3ex\" type=\"text\" name=\"search\" id=\"search\" ng-model=\"searchText\"></form></div>"+
+                    "<div width=\"70%\" style=\"float:none test-align:center;\">" +
+            "<form action=\"DeleteServlet\" method=\"get\" align=\"center\"><table border=\"1px\" align=\"center\" cellpadding=\"10\">");
+            out.println(docType + "<tr><td></td><td>Test ID</td><td>Test Name</td><td>Test Description</td><td>Tags</td><td>Test Result</td><td>Expected Result</td><td>Date</td></tr>");
 
-            while (rs.next()) {
-                out.println("<tr><td><input type=\"radio\" name=\"del\" value=\""+ rs.getInt(1)+"\"></td>");
-                out.println("<td>" + rs.getInt(1) + "</td><td> " + rs.getString(2) + "</td><td>" + rs.getString(3) + "</td><td>" + rs.getString(4) + "</td><td>"
-                        + rs.getString(5) + "</td><td>" + rs.getString(6) + "</td><td>" + rs.getDate(7) + "</td>");
-                out.println("</tr>");
-            }
+            out.println("<tr ng-repeat=\"row in table_data | filter:searchText\">");
+            out.println("<td><input type=\"radio\" value=\"{{row.id}}\" name=\"del\"></td>");
+            out.println("<td>{{row.id}}</td>");
+            out.println("<td>{{row.name}}</td>");
+            out.println("<td>{{row.description}}</td>");
+            out.println("<td>{{row.tag}}</td>");
+            out.println("<td>{{row.result}}</td>");
+            out.println("<td>{{row.expect}}</td>");
+            out.println("<td>{{row.time}}</td>");
+            out.println("</tr>");
             out.println("</table><br><br><input align=\"center\" style=\"width:10em; height:4em;\" type=\"submit\" value=\"DELETE\"></form>" + "<h3 style=\"text-align:center\">");
             //out.println("<br>");
 
@@ -96,7 +107,7 @@ public class ServletDisplay extends HttpServlet {
                     "<input style=\"width:10em; height:4em;\" type=\"submit\" value=\"INSERT\"></form>");
             out.println("<div class=\"divider\">");
 
-            out.println("</div></div>");
+            out.println("</div></div></div>");
 
             rs.close();
             stmt.close();
