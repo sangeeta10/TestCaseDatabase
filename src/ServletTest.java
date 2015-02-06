@@ -46,9 +46,12 @@ public class ServletTest extends HttpServlet {
             else {
                 s = "RECORD INSERTION FAILED!!";
             }
-            out.println("<html><head><title>Insert</title></head><body bgcolor=\"#f0f8ff\"><h2 align=\"center\">"+s+"</h2><div align=\"center\">"+
+            out.println("<html><head><script>function dis(){ alert(\""+ s +"\"); window.location.assign(\"http://localhost:8570/display.html\"); }"+
+            "</script></head><body onload=\"dis()\"></body></html>");
+            //response.sendRedirect("/display.html");
+            /*out.println("<html><head><title>Insert</title></head><body bgcolor=\"#f0f8ff\"><h2 align=\"center\">"+s+"</h2><div align=\"center\">"+
                     "<form name=\"more\" action=\"form.html\"><input style=\"width: 20em; size: 4em;\" type =\"submit\" value=\"INSERT MORE RECORDS\"></form>"
-                    +"<form name=\"display\" action=\"display.html\"><input style=\"width: 20em; size: 4em;\" type=\"submit\" value=\"DISPLAY\"></form><form name=\"main\" action=\"index.html\"><input style=\"width: 20em; size: 4em;\" type=\"submit\" value=\"BACK TO MAIN MENU\"></form></div>"+"</body></html>");
+                    +"<form name=\"display\" action=\"display.html\"><input style=\"width: 20em; size: 4em;\" type=\"submit\" value=\"BACK\"></form></div>"+"</body></html>");*/
 
             /*rs = stmt.executeQuery("SELECT * FROM testtable");
             String docType = "<!doctype html public \\\\\\\"-//w3c//dtd html 4.0 \"+\n" +
@@ -69,13 +72,16 @@ public class ServletTest extends HttpServlet {
 
 
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            out.println("<html><head><script>function dis(){ alert(\"RECORD INSERTION FAILED!!!\"); window.location.assign(\"http://localhost:8570/display.html\"); }" +
+                    "</script></head><body onload=\"dis()\"></body></html>");
+            response.sendRedirect("/display.html");
         } catch (SQLException e) {
-            e.printStackTrace();
-            String s="RECORD INSERTION FAILED!!";
+            out.println("<html><head><script>function dis(){ alert(\"RECORD INSERTION FAILED!!!\"); window.location.assign(\"http://localhost:8570/display.html\"); }"+
+                    "</script></head><body onload=\"dis()\"></body></html>");
+            /*String s="RECORD INSERTION FAILED!!";
             out.println("<html><head><title>Insert</title></head><body bgcolor=\"#f0f8ff\"><h2 align=\"center\">"+s+"</h2>"+
                     "<div align=\"center\"><form name=\"more\" action=\"form.html\"><input style=\"width: 20em; size: 4em;\" type =\"submit\" value=\"INSERT MORE RECORDS\"></form>"
-                    +"<form name=\"display\" action=\"display.html\"><input style=\"width: 20em; size: 4em;\" type=\"submit\" value=\"DISPLAY\"></form><form name=\"main\" action=\"index.html\"><input style=\"width: 20em; size: 4em;\" type=\"submit\" value=\"BACK TO MAIN MENU\"></form>"+"</div></body></html>");
+                    +"<form name=\"display\" action=\"display.html\"><input style=\"width: 20em; size: 4em;\" type=\"submit\" value=\"BACK\"></form>"+"</div></body></html>");*/
         }
 
 

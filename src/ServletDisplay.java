@@ -65,18 +65,39 @@ public class ServletDisplay extends HttpServlet {
                     "table tr:nth-child(even) {\n" +
                     "  background-color: #ffffff;\n" +
                     "}\n" +
-                    "</style></head><body bgcolor=\"#f0f8ff\">" +
-                    "<h3 style=\"text-align:center\">TEST CASE DATABASE" + "</h3><table border=\"1px\" align=\"center\" cellpadding=\"10\">";
-            out.println(docType + "<tr><td>Test ID</td><td>Test Name</td><td>Test Description</td><td>Tags</td><td>Test Result</td><td>tExpected Result</td><td>Date</td></tr>");
+                    ".divider{\n" +
+                    "    width:20em;\n" +
+                    "    height:auto;\n" +
+                    "    display:inline-block;\n" +
+                    "}</style>"+
+                    "<script type=\"text/javascript\" src=\"http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js\"></script>\n" +
+                    "<script>jQuery(function(){\n" +
+                    "$(\"#search\").autocomplete(\"getlist.jsp\");\n" +
+                    "});" +
+                    " </script>"+
+                    "</head><body bgcolor=\"#f0f8ff\">" +
+                    "<h2 style=\"text-align:center\">TEST CASE DATABASE</h2>"+
+            "<div width=\"30%\" style=\"float:left\"><form align=\"center\">" +
+                    "<input style=\"width:20em; height:4em;\" type=\"text\" name=\"search\" id=\"search\"></form></div>"+
+                    "<div width=\"70%\" style=\"float:none\" test-align:center;\">"+
+            "<form action=\"DeleteServlet\" method=\"get\" align=\"center\"><table border=\"1px\" align=\"center\" cellpadding=\"10\">";
+            out.println(docType + "<tr><td></td><td>Test ID</td><td>Test Name</td><td>Test Description</td><td>Tags</td><td>Test Result</td><td>tExpected Result</td><td>Date</td></tr>");
 
             while (rs.next()) {
-                out.println("<tr>");
+                out.println("<tr><td><input type=\"radio\" name=\"del\" value=\""+ rs.getInt(1)+"\"></td>");
                 out.println("<td>" + rs.getInt(1) + "</td><td> " + rs.getString(2) + "</td><td>" + rs.getString(3) + "</td><td>" + rs.getString(4) + "</td><td>"
                         + rs.getString(5) + "</td><td>" + rs.getString(6) + "</td><td>" + rs.getDate(7) + "</td>");
                 out.println("</tr>");
             }
-            out.println("</table>" + "<h3 style=\"text-align:center\"><form name=\"back\" action=\"index.html\" align=\"center\">" +
-                    "<input style=\"width:20em; height:4em;\" type=\"submit\" value=\"BACK TO HOME PAGE\"></form>" + "</body></html>");
+            out.println("</table><br><br><input align=\"center\" style=\"width:10em; height:4em;\" type=\"submit\" value=\"DELETE\"></form>" + "<h3 style=\"text-align:center\">");
+            //out.println("<br>");
+
+            out.println("<form name=\"insert\" action=\"form.html\"\">" +
+                    "<input style=\"width:10em; height:4em;\" type=\"submit\" value=\"INSERT\"></form>");
+            out.println("<div class=\"divider\">");
+
+            out.println("</div></div>");
+
             rs.close();
             stmt.close();
 
