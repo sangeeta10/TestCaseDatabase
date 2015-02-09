@@ -109,7 +109,8 @@ public class ServletDisplay extends HttpServlet {
                     "<input style=\"width:10em; height:4em;\" type=\"submit\" value=\"INSERT\"></form>");
             out.println("<div class=\"divider\">");
 
-            out.println("</div></div></div>");
+            out.println("</div></div></div></body></html>");
+
 
             rs.close();
             stmt.close();

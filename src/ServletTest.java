@@ -22,7 +22,7 @@ public class ServletTest extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-
+        Integer port = request.getLocalPort();
         //  Database credentials
         String USER = "root";
         String PASS = "admin";
@@ -46,7 +46,8 @@ public class ServletTest extends HttpServlet {
             else {
                 s = "RECORD INSERTION FAILED!!";
             }
-            out.println("<html><head><script>function dis(){ alert(\""+ s +"\"); window.location.assign(\"http://localhost:8578/display.html\"); }"+
+
+            out.println("<html><head><script>function dis(){ alert(\""+ s +"\"); window.location.assign(\"http://localhost:"+port+"/display.html\"); }"+
             "</script></head><body onload=\"dis()\"></body></html>");
             //response.sendRedirect("/display.html");
             /*out.println("<html><head><title>Insert</title></head><body bgcolor=\"#f0f8ff\"><h2 align=\"center\">"+s+"</h2><div align=\"center\">"+
@@ -72,11 +73,11 @@ public class ServletTest extends HttpServlet {
 
 
         } catch (ClassNotFoundException e) {
-            out.println("<html><head><script>function dis(){ alert(\"RECORD INSERTION FAILED!!!\"); window.location.assign(\"http://localhost:8578/display.html\"); }" +
+            out.println("<html><head><script>function dis(){ alert(\"RECORD INSERTION FAILED!!!\"); window.location.assign(\"http://localhost:"+port+"/display.html\"); }" +
                     "</script></head><body onload=\"dis()\"></body></html>");
             response.sendRedirect("/display.html");
         } catch (SQLException e) {
-            out.println("<html><head><script>function dis(){ alert(\"RECORD INSERTION FAILED!!!\"); window.location.assign(\"http://localhost:8578/display.html\"); }"+
+            out.println("<html><head><script>function dis(){ alert(\"RECORD INSERTION FAILED!!!\"); window.location.assign(\"http://localhost:"+port+"/display.html\"); }"+
                     "</script></head><body onload=\"dis()\"></body></html>");
             /*String s="RECORD INSERTION FAILED!!";
             out.println("<html><head><title>Insert</title></head><body bgcolor=\"#f0f8ff\"><h2 align=\"center\">"+s+"</h2>"+
