@@ -46,7 +46,7 @@ public class ServletTest extends HttpServlet {
             else {
                 s = "RECORD INSERTION FAILED!!";
             }
-            out.println("<html><head><script>function dis(){ alert(\""+ s +"\"); window.location.assign(\"http://localhost:8570/display.html\"); }"+
+            out.println("<html><head><script>function dis(){ alert(\""+ s +"\"); window.location.assign(\"http://localhost:8578/display.html\"); }"+
             "</script></head><body onload=\"dis()\"></body></html>");
             //response.sendRedirect("/display.html");
             /*out.println("<html><head><title>Insert</title></head><body bgcolor=\"#f0f8ff\"><h2 align=\"center\">"+s+"</h2><div align=\"center\">"+
@@ -72,11 +72,11 @@ public class ServletTest extends HttpServlet {
 
 
         } catch (ClassNotFoundException e) {
-            out.println("<html><head><script>function dis(){ alert(\"RECORD INSERTION FAILED!!!\"); window.location.assign(\"http://localhost:8570/display.html\"); }" +
+            out.println("<html><head><script>function dis(){ alert(\"RECORD INSERTION FAILED!!!\"); window.location.assign(\"http://localhost:8578/display.html\"); }" +
                     "</script></head><body onload=\"dis()\"></body></html>");
             response.sendRedirect("/display.html");
         } catch (SQLException e) {
-            out.println("<html><head><script>function dis(){ alert(\"RECORD INSERTION FAILED!!!\"); window.location.assign(\"http://localhost:8570/display.html\"); }"+
+            out.println("<html><head><script>function dis(){ alert(\"RECORD INSERTION FAILED!!!\"); window.location.assign(\"http://localhost:8578/display.html\"); }"+
                     "</script></head><body onload=\"dis()\"></body></html>");
             /*String s="RECORD INSERTION FAILED!!";
             out.println("<html><head><title>Insert</title></head><body bgcolor=\"#f0f8ff\"><h2 align=\"center\">"+s+"</h2>"+

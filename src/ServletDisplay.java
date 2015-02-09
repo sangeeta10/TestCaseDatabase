@@ -63,7 +63,8 @@ public class ServletDisplay extends HttpServlet {
             }
             String new_table = table_data.substring(0,table_data.length()-1)+']';
             String docType = "<!doctype html public \\\\\\\"-//w3c//dtd html 4.0 \"+\n" +
-                    "\"transitional//en\\\"><html><head><title>Page2</title><style>\n" +
+                    "\"transitional//en\\\"><html><head><title>Test Case Database</title><style>\n" +
+                    "#tab { height:400px;overflow-y: scroll;}"+
                     "table, th , td  {\n" +
                     "  border: 1px solid grey;\n" +
                     "  border-collapse: collapse;\n" +
@@ -84,13 +85,14 @@ public class ServletDisplay extends HttpServlet {
             out.println("<body bgcolor=\"#f0f8ff\">" +
                     "<div ng-app=\"\" ng-init=\""+new_table+"\">"+
                     "<h2 style=\"text-align:center\">TEST CASE DATABASE</h2>"+
-            "<div width=\"20em\" style=\"float:left\"><form align=\"center\">" +
-                    "<input style=\"width:20em; height:3ex\" type=\"text\" name=\"search\" id=\"search\" ng-model=\"searchText\"></form></div>"+
+            "<div width=\"20em\" style=\"float:left\">" +
+                    "<b><center>SEARCH</center></b><form align=\"center\">" +
+                    "<input style=\"width:20em; height:4ex\" type=\"text\" name=\"search\" id=\"search\" ng-model=\"searchText\"></form></div>"+
                     "<div width=\"70%\" style=\"float:none test-align:center;\">" +
-            "<form action=\"DeleteServlet\" method=\"get\" align=\"center\"><table border=\"1px\" align=\"center\" cellpadding=\"10\">");
-            out.println(docType + "<tr><td></td><td>Test ID</td><td>Test Name</td><td>Test Description</td><td>Tags</td><td>Test Result</td><td>Expected Result</td><td>Date</td></tr>");
+            "<form action=\"DeleteServlet\" method=\"get\" align=\"center\"><div id=\"tab\"><table class=\"tableSection\" border=\"1px\" align=\"center\" cellpadding=\"10\">");
+            out.println(docType + "<thead><tr><td></td><td>Test ID</td><td>Test Name</td><td>Test Description</td><td>Tags</td><td>Test Result</td><td>Expected Result</td><td>Date</td></tr></thead>");
 
-            out.println("<tr ng-repeat=\"row in table_data | filter:searchText\">");
+            out.println("<tbody><tr ng-repeat=\"row in table_data | filter:searchText\">");
             out.println("<td><input type=\"radio\" value=\"{{row.id}}\" name=\"del\"></td>");
             out.println("<td>{{row.id}}</td>");
             out.println("<td>{{row.name}}</td>");
@@ -99,8 +101,8 @@ public class ServletDisplay extends HttpServlet {
             out.println("<td>{{row.result}}</td>");
             out.println("<td>{{row.expect}}</td>");
             out.println("<td>{{row.time}}</td>");
-            out.println("</tr>");
-            out.println("</table><br><br><input align=\"center\" style=\"width:10em; height:4em;\" type=\"submit\" value=\"DELETE\"></form>" + "<h3 style=\"text-align:center\">");
+            out.println("</tr></tbody>");
+            out.println("</table></div><br><br><input align=\"center\" style=\"width:10em; height:4em;\" type=\"submit\" value=\"DELETE\"></form>" + "<h3 style=\"text-align:center\">");
             //out.println("<br>");
 
             out.println("<form name=\"insert\" action=\"form.html\"\">" +
